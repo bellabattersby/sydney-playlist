@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tunnel Vision</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"
+      integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ=="
+      crossorigin="anonymous"
+    ></script>
+    <meta name="description" content="A simple exercise template." />
+    <!-- styles -->
+    <style>
+      div > div {
+        transition-property: font-size letter-spacing;
+        transition-duration: 60s;
+      }
+      .highlight {
+        color: yellow;
+        font-size: 2em;
+        letter spacing: 20px;
+        transform: rotate(360deg);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>💿 MELBOURNE PLAYLIST // 💿</h1>
+    <div>
+      <div id="poem-line-0">Depreston - Courtney Barnet</div>
+      <div id="poem-line-1">On the Squaure - Mac DeMarco</div>
+      <div id="poem-line-2">Welcome to the Internet - Bo Burnham</div>
+      <div id="poem-line-3">Enter the Void Opening Credits</div>
+    </div>
+    <button id="play-sounds">CLICK HERE 2 HEAR</button>
+    <!-- script -->
+    <script>
+      const currentPoem = [
+        "https://cdn.glitch.com/c942f5f8-e4aa-4ee4-86bf-737ac032dfdd%2FCourtney%20Barnett%20-%20Depreston%20(Audio).mp3?v=1632540052337",
+        "https://cdn.glitch.com/c942f5f8-e4aa-4ee4-86bf-737ac032dfdd%2FMac%20Demarco%20-%20%20On%20The%20Square.mp3?v=1632484972657",
+        "https://cdn.glitch.com/c942f5f8-e4aa-4ee4-86bf-737ac032dfdd%2FWelcome%20to%20the%20Internet%20-%20Bo%20Burnham%20(from%20_Inside_%20--%20ALBUM%20OUT%20NOW).mp3?v=1632540138655",
+        "https://cdn.glitch.com/c942f5f8-e4aa-4ee4-86bf-737ac032dfdd%2FEnter%20the%20Void%20-%20Intro%20Title%20Credit%20Sequence%20(1080p).mp3?v=1632540107633",
+      ];
+      const button = document.getElementById("play-sounds");
+      function readPoem(lineIndex) {
+        let sound = new Howl({
+          src: [currentPoem[lineIndex]],
+          preload: true,
+          onend: function() {
+            if (lineIndex < currentPoem.length - 1) {
+              readPoem(lineIndex + 1);
+            }
+            document
+              .querySelector("#poem-line-" + lineIndex)
+              .classList.toggle("highlight");
+          }
+        });
+        document
+          .querySelector("#poem-line-" + lineIndex)
+          .classList.toggle("highlight");
+        sound.play();
+      }
+      button.addEventListener("click", function() {
+        readPoem(0);
+      });
+    </script>
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js" defer></script>
+  </body>
+</html>
+
+ <style>
+  body {
+    font-family: "Fira Code", serif;
+    margin: 2em;
+    background-color: #5100F5;
+    color: white;
+    font-size: 1.2em;
+  }
+  h1 {
+    color: #F5000F;
+  }
+</style>
